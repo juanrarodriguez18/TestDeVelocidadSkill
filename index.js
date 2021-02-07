@@ -8,9 +8,6 @@ require('./lib/utils')();		//Fichero de funciones de utilidad
 /* CONSTANTS */
 const skillBuilder = Alexa.SkillBuilders.custom();
 
-//Variables internas
-var USUARIO = '';
-var passwordConfirmed = false;
 /** FIN Templates y data **/
 
 const WelcomeHandler = {
@@ -25,16 +22,13 @@ const WelcomeHandler = {
 	  
   	limpiarNavegacion();
   	USUARIO = '';
-  	infoMessage = 'Aún no me has especificado tu contraseña, necesito que me la confirmes primero para acceder a la información.';
-  	passwordConfirmed = false;
   	
     let speakOutput = welcomeMessage;
-    let responseBuilder = handlerInput.responseBuilder;
   	
   	//Devolver resultados	
   	return handlerInput.responseBuilder
   		  .speak(speakOutput)
-  		  .reprompt(passwordError)
+  		  .reprompt(repromptOutput)
   		  .getResponse();
   }
 };
@@ -56,7 +50,7 @@ const HelpHandler = {
       .getResponse();
   },
 };
-n
+
 /**
 **	Handler que recupera la Información
 **/
