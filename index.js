@@ -18,10 +18,12 @@ const WelcomeHandler = {
 	
     return request.type === 'LaunchRequest'
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
 	  
   	limpiarNavegacion();
-  	USUARIO = '';
+  	const result = await testDeVelocidad();
+
+    console.log("prueba: "+result);
   	
     let speakOutput = welcomeMessage;
   	
