@@ -25,7 +25,8 @@ const WelcomeHandler = {
 
     console.log("prueba: "+result);
   	
-    let speakOutput = welcomeMessage;
+    let speakOutput = "Test de Velocidad Realizado con éxito, estos son los resultados; Ping: "+result.ping
+                        +", Velocidad de Bajada: "+result.download+" Megabits, Velocidad de Subida: "+result.upload+" Megabits.";
   	
   	//Devolver resultados	
   	return handlerInput.responseBuilder
