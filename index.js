@@ -25,12 +25,12 @@ const WelcomeHandler = {
 
     console.log("prueba: "+result);
   	
-    let speakOutput = "Test de Velocidad Realizado con éxito, estos son los resultados; Ping: "+Math.round(result.ping)
-                        +" milisegundos, Velocidad de Bajada: "+Math.round(result.download)+" Megabits, Velocidad de Subida: "+Math.round(result.upload)+" Megabits.";
+    speedTestMessage = "¡Test de Velocidad Realizado con éxito! Estos son los resultados. Ping: "+Math.round(result.ping)
+                        +" milisegundos, Velocidad de Bajada: "+Math.round(result.download/1000000)+" Megabits, Velocidad de Subida: "+Math.round(result.upload/1000000)+" Megabits.";
   	
   	//Devolver resultados	
   	return handlerInput.responseBuilder
-  		  .speak(speakOutput)
+  		  .speak(speedTestMessage)
   		  .reprompt(repromptOutput)
   		  .getResponse();
   }
@@ -55,30 +55,6 @@ const HelpHandler = {
 };
 
 /**
-**	Handler que recupera la Información
-**/
-const GetInfoHandler = {
-  canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
-
-    return request.type === 'IntentRequest' && request.intent.name === 'C_GetInfo';
-  },
-  handle(handlerInput) {
-    
-      if(passwordConfirmed && USUARIO.length != 0){
-        printTrace("[GetInfoHandler]:"+info);
-        infoMessage = "";
-        printTrace("[GetInfoHandler]:"+info);
-      }
-      
-    return handlerInput.responseBuilder
-      .speak(infoMessage)
-	  .reprompt(repromptOutput)
-      .getResponse();
-  },
-};
-
-/**
 **	Handler que repite la Información
 **/
 const RepeatInfoHandler = {
@@ -90,7 +66,7 @@ const RepeatInfoHandler = {
   handle(handlerInput) {
       printTrace("RepeatInfoHandler]:"+info);
     return handlerInput.responseBuilder
-      .speak(infoMessage)
+      .speak(speedTestMessage)
 	  .reprompt(repromptOutput)
       .getResponse();
   },
@@ -161,7 +137,6 @@ exports.handler = skillBuilder
     HelpHandler,
     ExitHandler,
     SessionEndedRequestHandler,
-	GetInfoHandler,
 	RepeatInfoHandler,
 	WelcomeHandler,
   )
